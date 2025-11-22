@@ -3,7 +3,7 @@
 [![Java](https://img.shields.io/badge/Java-17+-red.svg)](https://java.com)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-> Просто ахуенный погодный чекер на Java, потому что PHP — для лузеров
+> Просто ахуенный погодный чекер на Java
 
 ## Features
 - ✅ Берет данные с API (не как эти JS-ники с их jQuery)
