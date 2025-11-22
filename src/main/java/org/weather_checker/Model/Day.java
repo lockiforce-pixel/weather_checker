@@ -1,7 +1,7 @@
 package org.weather_checker.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -19,25 +19,20 @@ public class Day {
     private String description;
     private String icon;
 
+
     /**
      * Getters Setters for params
      * @param datetime
      */
 
+
+
     public void setDatetime(String datetime) { this.datetime = datetime; }
     public String getDatetime() { return this.datetime; }
 
     public void setTemp(Double temp) { this.temp = temp; }
-    public Long getTemp(char type) {
-        if (type == 'F') {
-            return Math.round(this.temp);
-        } else if (type == 'C') {
-            return Math.round((this.temp - 32) * 5/9);
-        }
-        else {
-            throw new IllegalArgumentException();
-        }
-    }
+    public Double getTemp() { return temp; }
+
 
     public void setHumidity(Double humidity) { this.humidity = humidity; }
     public Double getHumidity() { return this.humidity; }

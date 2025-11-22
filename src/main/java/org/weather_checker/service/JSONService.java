@@ -1,4 +1,4 @@
-package org.weather_checker.Worker;
+package org.weather_checker.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -7,8 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.weather_checker.Model.Weather;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class JSONWorker {
-
+public class JSONService {
 
     public static Weather getString(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -16,5 +15,4 @@ public class JSONWorker {
 
         return mapper.readValue(json, Weather.class);
     }
-
 }
