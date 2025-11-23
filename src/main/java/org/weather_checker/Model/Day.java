@@ -7,32 +7,28 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Day {
-    private String datetime;
+    private String icon;
     private Double temp;
     private Double humidity;
-    private Double precipcover;
-    private ArrayList<String> preciptype;
-    private Double windspeed;
-    private Double cloudcover;
+    private String datetime;
     private Double moonphase;
+    private Double windspeed;
+    private Double precipcover;
+    private Double cloudcover;
     private String conditions;
     private String description;
-    private String icon;
+    private ArrayList<String> preciptype;
 
 
     /**
-     * Getters Setters for params
-     * @param datetime
+     * All getters and setters must be for create Mapper JSON form response
      */
-
-
 
     public void setDatetime(String datetime) { this.datetime = datetime; }
     public String getDatetime() { return this.datetime; }
 
     public void setTemp(Double temp) { this.temp = temp; }
     public Double getTemp() { return temp; }
-
 
     public void setHumidity(Double humidity) { this.humidity = humidity; }
     public Double getHumidity() { return this.humidity; }

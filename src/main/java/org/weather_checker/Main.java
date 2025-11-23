@@ -6,7 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import org.weather_checker.service.*;
-import org.weather_checker.Model.HTTP;
+import org.weather_checker.HttpController.HTTPController;
 import org.weather_checker.Model.Cache;
 import org.weather_checker.Model.Weather;
 
@@ -15,19 +15,19 @@ import org.weather_checker.Model.Weather;
 public class Main {
 
     public static void main(String[] args) throws Throwable {
-        System.out.println(System.getProperty("user.dir"));
-        File cacheFile = new CacheService().getCacheFile(new Cache());
 
-        if (CacheService.hasContent(cacheFile) || !CacheService.checkActualFile(cacheFile)) {
+        File cacheFile = new Cache().getCacheFile(new Cache());
 
-            HttpClient httpClient = HTTP.createClient();
-            HttpRequest httpRequest = HTTP.createRequest();
+        if (Cache.hasContent(cacheFile) || !Cache.checkActualFile(cacheFile)) {
 
-            HttpResponse<String> response = APIService.sendRequest(httpClient, httpRequest);
+            HttpClient httpClient = APIService.createClient();
+            HttpRequest httpRequest = APIService.createRequest();
+
+            HttpResponse<String> response = HTTPController.sendRequest(httpClient, httpRequest);
             Files.writeString(cacheFile.toPath(), response.body());
         }
 
-        Weather weather = JSONService.getString(Files.readString(cacheFile.toPath()));
-        ConsoleService.printWeatherInfo(weather);
+        Weather weather = JSONService.getWeatherObj(Files.readString(cacheFile.toPath()));
+        ConsoleService.printWeatherInfo(WeatherService.createOutputText(weather));
     }
 }

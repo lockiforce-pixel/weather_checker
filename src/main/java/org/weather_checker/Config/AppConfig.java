@@ -1,13 +1,15 @@
 package org.weather_checker.Config;
 
+import java.util.Objects;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
 import java.util.Properties;
 import io.github.cdimascio.dotenv.Dotenv;
 
 
-
+/**
+ * To work with the program configuration
+ */
 public class AppConfig {
 
     private static final Properties properties = new Properties();
@@ -31,6 +33,12 @@ public class AppConfig {
         }
     }
 
+    /**
+     * Get property by key
+     *
+     * @param key Property key
+     * @return Property
+     */
     public static String getProperty(String key) {
 
         // Support vars environment (env, var)
