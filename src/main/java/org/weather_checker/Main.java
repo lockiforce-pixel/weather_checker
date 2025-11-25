@@ -1,8 +1,11 @@
 package org.weather_checker;
 
+import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.concurrent.CompletableFuture;
+
 import org.weather_checker.service.*;
 import org.weather_checker.HttpController.HTTPController;
 import org.weather_checker.Model.Cache;
@@ -16,12 +19,18 @@ public class Main {
 
         Cache cache = new Cache();
 
-        if (!cache.hasContent() || !cache.checkActualFile()) {
+        if (cache.isEmpty() || !cache.checkActualFile()) {
             HttpClient httpClient = APIService.createClient();
             HttpRequest httpRequest = APIService.createRequest();
 
-            HttpResponse<String> response = HTTPController.sendRequest(httpClient, httpRequest);
-            cache.storeCache(response.body());
+            CompletableFuture<HttpResponse<String>> asyncRequest = CompletableFuture.supplyAsync(() -> {
+                try {
+                    return HTTPController.sendRequest(httpClient, httpRequest);
+                } catch (IOException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            cache.storeCache(asyncRequest.get().body());
         }
 
         Weather weather = JSONService.getWeatherObj(cache.getCache());

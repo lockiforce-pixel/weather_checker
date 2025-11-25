@@ -30,12 +30,10 @@ public class Cache {
      * @throws IOException If an error occurs during recording
      */
     public void storeCache(String body) throws IOException {
-        if (this.getPath().toFile().exists()) {
-            Files.writeString(this.getPath(), body);
-        }
-        else {
+        if (!this.getPath().toFile().exists()) {
             this.createCacheFile();
         }
+        Files.writeString(this.getPath(), body);
     }
 
     private void createCacheFile() throws IOException {
@@ -74,8 +72,11 @@ public class Cache {
      * @return Returns true if there are any entries in the file.
      * @throws IOException Returns an error if the file does not exist.
      */
-    public boolean hasContent() throws IOException {
-        return Files.size(this.getPath()) > 0;
+    public boolean isEmpty() throws IOException {
+        if (!Files.exists(this.getPath())) {
+            this.createCacheFile();
+        }
+        return Files.readString(this.getPath()).isEmpty();
     }
 
     public String getCache() throws IOException {

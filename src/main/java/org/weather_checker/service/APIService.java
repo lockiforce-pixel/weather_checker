@@ -22,7 +22,7 @@ public class APIService {
     public static HttpClient createClient() {
 
         return HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(5))
+                .connectTimeout(Duration.ofSeconds(15))
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .build();
     }
