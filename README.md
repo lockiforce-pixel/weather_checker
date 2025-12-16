@@ -12,6 +12,6 @@
 
 ## Installation
 ```bash
-git clone https://github.com/yourname/weather-checker.git
+git clone https://github.com/lockiforce-pixel/weather-checker.git
 cd weather-checker
 mvn clean compile exec:java -Dexec.mainClass="com.yourname.WeatherApp"
